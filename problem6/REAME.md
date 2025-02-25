@@ -24,9 +24,12 @@ A real-time scoreboard system that displays and manages the top 10 users' scores
 - Score validation and authorization
 - Error handling and logging
 
-    "userId": "string", 
-    "score": "number",
-    "timestamp": "string"
+        {
+            "userId": "string", 
+            "score": "number",
+            "timestamp": "string"
+        }
+
 
 ### 3. Web Application
 - Real-time scoreboard display
@@ -49,14 +52,14 @@ Key features:
 
 #### Authentication
 
-POST /api/auth/login
-POST /api/auth/refresh
+    POST /api/auth/login
+    POST /api/auth/refresh
 
 #### Score Management
 
-POST /api/scores/update
-GET /api/leaderboard
-GET /api/users/:userId/score
+    POST /api/scores/update
+    GET /api/leaderboard
+    GET /api/users/:userId/score
 
 ### 5. Security Measures
 1. Request Validation
@@ -70,24 +73,6 @@ GET /api/users/:userId/score
    - Action cooldown periods
    - Suspicious activity detection
    - Score rollback capability
-
-## Data Flow
-
-sequenceDiagram
-    participant User
-    participant Web Application
-    participant Score Management Service
-    participant MongoDB
-    participant WebSocket Server
-    participant Client  
-
-    User->>+Web Application: Initiates score update
-    Web Application->>+Score Management Service: Validates and updates score
-    Score Management Service->>+MongoDB: Persists score changes
-    MongoDB-->>-Score Management Service: Confirms score update
-    Score Management Service->>+WebSocket Server: Broadcasts score update   
-    WebSocket Server->>+Client: Updates scoreboard
-    Client->>+Web Application: Displays updated scoreboard
 
 ## Database Schema
 
@@ -121,20 +106,20 @@ sequenceDiagram
 ## WebSocket Events
 
 // Client -> Server
-interface SubscribeEvent {
-type: 'SUBSCRIBE_LEADERBOARD';
-}
+    interface SubscribeEvent {
+    type: 'SUBSCRIBE_LEADERBOARD';
+    }
 // Server -> Client
-interface LeaderboardUpdate {
-type: 'LEADERBOARD_UPDATE';
-data: {
-rankings: Array<{
-userId: string;
-username: string;
-score: number;
-}>;
-};
-}
+    interface LeaderboardUpdate {
+    type: 'LEADERBOARD_UPDATE';
+    data: {
+    rankings: Array<{
+    userId: string;
+    username: string;
+    score: number;
+    }>;
+    };
+    }
 
 ## Security Implementation
 
