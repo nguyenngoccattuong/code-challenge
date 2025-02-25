@@ -106,19 +106,22 @@ Key features:
 ## WebSocket Events
 
 // Client -> Server
+
     interface SubscribeEvent {
-    type: 'SUBSCRIBE_LEADERBOARD';
+        type: 'SUBSCRIBE_LEADERBOARD';
     }
+
 // Server -> Client
+
     interface LeaderboardUpdate {
-    type: 'LEADERBOARD_UPDATE';
-    data: {
-    rankings: Array<{
-    userId: string;
-    username: string;
-    score: number;
-    }>;
-    };
+        type: 'LEADERBOARD_UPDATE';
+        data: {
+            rankings: Array<{
+                userId: string;
+                username: string;
+                score: number;
+            }>;
+        };
     }
 
 ## Security Implementation
